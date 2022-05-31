@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+        <div class="col-5 mx-auto">
+            <h3 class="bg-primary text-white p-3">
+                Selahattin'in Listesi
+            </h3>
+
+            <div class="input-group mb-3">
+                <input [(ngModel)]="txtInput" type="text" class="form-control"
+                (keyup.enter)="addItem()">
+                <button 
+                [class]="getBtnClasses()"
+                
+                class="btn btn-outline"
+                (click)="addItem();">Add</button>
+            </div>
+            <div class="div form-check mb-3">
+                <input type="checkbox" [(ngModel)]="displayAll" id="displayAll" class="form-check-input">
+                <label>Hepsini Göster</label>
+            </div>
+          
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Açıklama</th>
+                                <th>Durum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of getItems(); let i=index;" [class]="{'bg-success':item.action, 'bg-warning':!item.action}">
+                                <td>{{i+1}}</td>
+                                <td>{{item.decsription}}</td>
+                                <td>{{item.action ? "Yapıldı":"Bekliyor"}}</td>
+                                <td>
+                                <input type="checkbox" [(ngModel)]="item.action" (change)="onChanged(item)">    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
